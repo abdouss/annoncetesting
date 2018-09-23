@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+ <div class="centerstage">
+ 	{% for annonce in annonces %}
+ 	 	<h1> <a href="{% url "detailannonce" slug=annonce.slug  %}">{{ annonce.nom }}</h1>
+ 	 	<ul>
+ 	 		<li>{{annonce.prix}}</li>
+ 	 		<li>{{annonce.created|date:"D M Y"}}</li>
+ 	 		<li>{{annonce.description}}</li>
+ 	 		<li>{{annonce.caractéristiques}}</li>
+ 	 		<li>{{annonce.lieuaproximité}}</li>
+ 	 		<li>{{annonce.categorys}}</li>
+ 	 		<li>{{annonce.villes}}</li>
+ 	 		<img src="{% static '' %}"/>
+
+ 	 	</ul>
+
+	{% endfor %}
+
+ </div>
+{% endblock %}

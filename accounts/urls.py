@@ -5,14 +5,14 @@ from accounts.views import (login_view,
                             user_profile, 
                             user_profile_update)
 
-from django.urls import path
+from django.urls import re_path
 
 urlpatterns = [
-	path(r'^profile/(?P<username>\w+)/$', user_profile, name='user_profile'),
-    path(r'^profile/(?P<username>\w+)/edit/$', user_profile_update, name='user_profile_update'),
-    path(r'^login/$', login_view, name='login'),
-    path(r'^register/$', register_view, name='register'),
-    path(r'^logout/$', logout_view, name='logout'),
+	re_path(r'^profile/(?P<username>\w+)/$', user_profile, name='user_profile'),
+    re_path(r'^profile/(?P<username>\w+)/edit/$', user_profile_update, name='user_profile_update'),
+    re_path(r'^login/$', login_view, name='login'),
+    re_path(r'^register/$', register_view, name='register'),
+    re_path(r'^logout/$', logout_view, name='logout'),
     #Contact
 
 
