@@ -41,7 +41,7 @@ class ListAnnonceNouveau(ListView):#lister les nouveaux annonces
 
 
 	def get_queryset(self):
-		return self.Annonce.objects.order_by('created')
+		return Annonce.objects.order_by('created')
 
 class DetailAnnonce(DetailView):
 
@@ -55,14 +55,18 @@ class CreateAnnonce(LoginRequiredMixin,CreateView):
 
 	form_class       =Annonceform
 	model            =Annonce
+	template_name    ="appannonce/Formannonce.html"
+
 	success_url      =reverse_lazy ('detailannonce')
 
 
 class UpdateAnnonce(LoginRequiredMixin,UpdateView):
 
-	form_class   =Annonceform
-	model        =Annonce
-	success_url  =reverse_lazy ('detailannonce')
+	form_class           =Annonceform
+	model                =Annonce
+	template_name        ="appannonce/Formannonce.html"
+
+	success_url          =reverse_lazy ('detailannonce')
 
 
 class DeleteAnnonce(LoginRequiredMixin,DeleteView):
@@ -73,3 +77,14 @@ class DeleteAnnonce(LoginRequiredMixin,DeleteView):
 
 
 
+class ListAnnonce(ListView):#lister les annonce est on choisier la ville est categorie est type
+
+	model         =Annonce
+	template_name ="appannonce/listannonce.html"
+	paginate_by   =15
+	context_object_name = 'annonces'
+
+
+
+	def get_queryset(self):
+		return self.Annonce.objects.filter(ville__exact='villes').filter(category__exact="categorys").filter(typeannonce__exact="typeannonce")

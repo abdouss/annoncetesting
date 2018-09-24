@@ -37,7 +37,7 @@ class User(AbstractUser):
                                         )])
 
 
-	email           =models.EmailField(blank=True,null=False)
+	email           =models.EmailField(unique=True,blank=True,null=False)
 
 	USERNAME_FIELD = 'email' # use email to log in
 	REQUIRED_FIELDS = ['username'] # required when user is created
@@ -49,3 +49,4 @@ class User(AbstractUser):
 	def get_absolute_url(self):
 		return reverse("user_profile", kwargs={"username": self.username})
 
+       

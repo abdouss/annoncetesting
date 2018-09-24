@@ -1,12 +1,7 @@
 {% extends "appannonce/base.html" %}
-
 {% block content %}
 <form class="post-form" method='POST'>{% csrf_token %}
-	{{form.as_p}}
-	<button type="submit" name="button">
-		save
-	</button>
-
+	<p> are you sure to delete cette posts {{object}} </p>
+	<input type="submit" class ="btn btn-danger" value="confirm">
 </form>
-
 {% endblock %}

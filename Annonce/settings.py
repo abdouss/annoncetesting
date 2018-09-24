@@ -24,6 +24,7 @@ SECRET_KEY = '&_ak8qp*00cz58sb7rau6utv3%oc^dhb$++ltin%e+ix$s#1e@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+AUTH_USER_MODEL = 'accounts.User'
 
 ALLOWED_HOSTS = []
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'Annonce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,"templates")],
+        'DIRS': [os.path.join(os.path.join(BASE_DIR,"templates"))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +124,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT =os.path.join(BASE_DIR,"static")
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")

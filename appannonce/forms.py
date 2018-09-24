@@ -1,13 +1,14 @@
 from __future__ import unicode_literals
 from django import forms
 
-from .models import Annonce 
+from .models import Annonce,Category
 
 class Annonceform(forms.ModelForm):
+	cat = forms.ModelChoiceField(queryset=Category.objects.all())
 
 	class Meta:
 		model =Annonce
-		fields =('nom',"prix",'description','caractéristiques','lieuaproximité','slug','category','image','ville')   
+		fields ='__all__'  
 
 
 
