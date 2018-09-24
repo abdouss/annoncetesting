@@ -1,14 +1,19 @@
 from __future__ import unicode_literals
 from django import forms
 
-from .models import Annonce,Category
-
+from .models import Annonce,Galerie
+import datetime
 class Annonceform(forms.ModelForm):
-	cat = forms.ModelChoiceField(queryset=Category.objects.all())
+	
+	image   =forms.ModelChoiceField(queryset=Galerie.objects.all())
+	created =forms.DateField(initial=datetime.date.today)
+
+
 
 	class Meta:
 		model =Annonce
-		fields ='__all__'  
+
+		fields =('nom','prix','ville','description','caractéristiques','lieuaproximité','phone',"slug")
 
 
 

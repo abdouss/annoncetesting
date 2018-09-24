@@ -41,7 +41,7 @@ class ListAnnonceNouveau(ListView):#lister les nouveaux annonces
 
 
 	def get_queryset(self):
-		return Annonce.objects.order_by('created')
+		return Annonce.objects.order_by('-created')
 
 class DetailAnnonce(DetailView):
 
@@ -57,9 +57,11 @@ class CreateAnnonce(LoginRequiredMixin,CreateView):
 	model            =Annonce
 	template_name    ="appannonce/Formannonce.html"
 
-	success_url      =reverse_lazy ('detailannonce')
 
+	def get_success_url(self, *args, **kwargs):
+	   return reverse('detailannonce',kwargs={'slug':self.object.slug})
 
+from django.urls import reverse
 class UpdateAnnonce(LoginRequiredMixin,UpdateView):
 
 	form_class           =Annonceform
