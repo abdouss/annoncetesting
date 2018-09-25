@@ -16,7 +16,7 @@ from django.urls import reverse
 class Galerie(models.Model):
 
 		image = models.ImageField(null=True, 
-		                            blank=True, 
+		                            blank=True,default='img/default.png',
 		                            height_field="height_field", 
 		                            width_field="width_field",
 		                            verbose_name="profile annonce "
@@ -45,20 +45,14 @@ class Annonce(models.Model):
 	phone            =models.PositiveIntegerField()
 	image            =models.ForeignKey(Galerie,on_delete=models.CASCADE,related_name='images',null=True)
 
-	tiping = (
-        ('location','Location'),
-        ('vente','vente'),
-       
-    )
+	tiping           =(('lo','Location'),('ve','vente'),)
 
-	typeannonce            =models.CharField(max_length=10,choices=tiping)
-	choiceville            =(('ca',"casablance"),("r","rabat"),)
-	ville                  =models.CharField(max_length=200,choices=choiceville)
-	cat  = (
-        ('appartement','appartement'),
-        ('vi','villa'),)
+	typeannonce      =models.CharField(max_length=10,choices=tiping)
+	choiceville      =(('ca',"casablance"),("r","rabat"),)
+	ville            =models.CharField(max_length=200,choices=choiceville)
+	cat  = (('app','appartement'),('vi','villa'),)
 
-	categorie            =models.CharField(max_length=200,choices=cat)
+	categorie        =models.CharField(max_length=200,choices=cat)
        
 
 

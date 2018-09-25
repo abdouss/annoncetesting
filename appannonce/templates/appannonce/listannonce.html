@@ -1,4 +1,5 @@
 {% extends "appannonce/base.html" %}
+{% load staticfiles %}
 {% block content %}
  <div class="centerstage">
  	{% for annonce in annonces %}
@@ -7,10 +8,18 @@
  	 		<li>{{annonce.prix}}</li>
  	 		<li>{{annonce.created|date:"D M Y"}}</li>
  	 		<li>{{annonce.description}}</li>
- 	 		<li>{{annonce.caractéristiques}}</li>
- 	 		<li>{{annonce.category}}</li>
- 	 		<li>{{annonce.ville}}</li>
- 	 		<li><img src="{{ annonce.image.url }}"/></li>
+ 	 		<li>{{ annonce.get_categorie_display }}</li>
+ 	 		<li>{{ annonce.get_ville_display }}</li>
+
+ 	 		<li>{{ annonce.get_typeannonce_display }}</li>
+ 	 	{% if annonce.lieuaproximité %}
+
+ 	 		<li><img src="{{annonce.lieuaproximité.url}}"></li>
+ 	 	{% endif %}
+ 	 		{% if annonce.images %}
+ 	 		  <li><img src="{{ annonce.images.all }}"/></li>
+
+ 	 	    {% endif %}
 
  	 	</ul>
 

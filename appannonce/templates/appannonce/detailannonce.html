@@ -6,9 +6,14 @@
  	 		<li>{{annonce.prix}}</li>
  	 		<li>{{annonce.created|date:"D M Y"}}</li>
  	 		<li>{{annonce.description}}</li>
- 	 		<li>{{annonce.category}}</li>
- 	 		<li>{{annonce.ville}}</li>
- 	 		<li><img src="{{ annonce.images.url }}"/></li>
+ 	 		<li>{{annonce.get_ville_display}}</li>
+ 	 		<li>{{annonce.get_categorie_display}}</li>
+ 	 		<li>{{ annonce.get_typeannonce_display }}</li>
+ 	 		{% if annonce.lieuaproximité %}
+
+ 	 			<li><img src="{{annonce.lieuaproximité.url}}"></li>
+ 	 	    {% endif %}
+
  	 		<a href="{% url "listannonce"  %}">Retour a la page liste des nouveaux annonces </a>
 
 

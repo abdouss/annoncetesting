@@ -13,7 +13,7 @@ class Annonceform(forms.ModelForm):
 	class Meta:
 		model =Annonce
 
-		fields =('nom','prix','ville','description','caractéristiques','lieuaproximité','phone',"slug")
+		fields =('nom','prix','ville','description','categorie','typeannonce','caractéristiques','lieuaproximité','phone',"slug")
 
 
 

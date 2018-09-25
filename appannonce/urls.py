@@ -1,11 +1,13 @@
 
-from appannonce.views import (contact)
+from appannonce.views import (contact,listerchoix)
 from django.urls import re_path
 from appannonce import views
 
 urlpatterns = [
 
 	re_path(r'^contact/$',contact, name='contact'),
+    re_path(r'^listchoix/$',listerchoix, name='listerchoix'),
+
     re_path(r'^home/$',views.Home.as_view(),name='home'),
     re_path(r'^$',views.ListAnnonceNouveau.as_view(),name='listannonce'),
     re_path(r'^detail/(?P<slug>[\w-]+)/$',views.DetailAnnonce.as_view(),name='detailannonce'),

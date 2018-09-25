@@ -90,3 +90,26 @@ class ListAnnonce(ListView):#lister les annonce est on choisier la ville est cat
 
 	def get_queryset(self):
 		return self.Annonce.objects.filter(ville__exact='villes').filter(category__exact="categorys").filter(typeannonce__exact="typeannonce")
+
+from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def listerchoix(request):
+
+	querylist =Annonce.objects.all()
+	query     =request.GET.get('q')
+
+	if query:
+		querylist =querylist.filter(Q(ville__icontains=query)|Q(categorie__icontains=query)|Q(typeannonce__icontains=query))
+
+	paginator = Paginator(querylist, 12)
+	page = request.GET.get("page")
+	try:
+	    query_list = paginator.page(page)
+	except PageNotAnInteger:
+	    query_list = paginator.page(1)
+	except EmptyPage:
+	    query_list = paginator.page(paginator.num_pages)
+
+	context = { "query_list": query_list }
+	return render(request, "appannonce/annonce_list.html", context)
