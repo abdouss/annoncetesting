@@ -15,6 +15,5 @@ urlpatterns = [
     re_path(r'^logout/$', logout_view, name='logout'),
     #Contact
 
-
 ]
  

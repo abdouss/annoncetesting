@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'appannonce.apps.AppannonceConfig',
     'crispy_forms',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

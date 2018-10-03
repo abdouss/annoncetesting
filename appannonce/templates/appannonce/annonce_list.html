@@ -2,26 +2,26 @@
 {% extends "appannonce/base.html" %}
 {% block content %}
 <div style="float: right;">
-    <form method='GET' action=''>
-        <option value="Ville">Ville</option>
-		{% for annonce in annonces %}
-		<option value="{{ annonce.slug }}">{{ annonce.ville }}</option>
-		{% endfor %}
-		<option value="categeorie">categeorie</option>
-		{% for annonce in annonces %}
-		 {{ annonce.categorie }}
-		{% endfor %}
-		<option value="type">type</option>
-		{% for annonce in annonces %}
-		<option value="{{ annonce.slug }}">{{ annonce.typeannonce }}</option>
-		{% endfor %}
+    <form method='get'>
+
+	        {{ filter.form.as_p }}
+
 		
         <input class="btn btn-primary" type='submit' value='Search' />
     </form>
 </div>
- <div class="centerstage">
+	{% if request.GET.q  %}
 
-{% for annonce in annonces %}
+	<p>showing search results for "{{ request.GET.q }}"</p><br/>
+		<p>showing search results for "{{ request.GET.q }}"</p><br/>
+	<p>showing search results for "{{ request.GET.q }}"</p><br/>
+
+
+	{% endif %}
+<div class="centerstage">
+
+	{% for annonce in filter.qs %}
+
  	 	<h1> <a href="{% url "detailannonce" slug=annonce.slug  %}">{{ annonce.nom }}</a></h1>
  	 	<ul>
  	 		<li>{{annonce.prix}}</li>
@@ -35,20 +35,19 @@
 
  	 		<li><img src="{{annonce.lieuaproximité.url}}"></li>
  	 	{% endif %}
- 	 		{% if annonce.images %}
- 	 		  <li><img src="{{ annonce.images.all }}"/></li>
+ 	 	{% for c in annonce.galeries.all %}
+ 	 		{% if c.image %}
+ 	 		  <li><img src="{{ c.image.url }}"/></li>
 
  	 	    {% endif %}
-
+ 	 	{% endfor %}
  	 	</ul>
+ 	{% empty %}
+ 	 <p> rien d annonce que vous cherchez </p>
 
 	{% endfor %}
 </div>
 
 <hr>
-{% if request.GET.q %}
 
-<p>showing search results for "{{ request.GET.q }}"</p><br>
-
-{% endif %}
 {% endblock %}

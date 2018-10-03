@@ -12,18 +12,21 @@
  	 		<li>{{ annonce.get_ville_display }}</li>
 
  	 		<li>{{ annonce.get_typeannonce_display }}</li>
- 	 	{% if annonce.lieuaproximité %}
+	 	 	{% if annonce.lieuaproximité %}
 
- 	 		<li><img src="{{annonce.lieuaproximité.url}}"></li>
- 	 	{% endif %}
- 	 		{% if annonce.images %}
- 	 		  <li><img src="{{ annonce.images.all }}"/></li>
+	 	 		<li><img src="{{annonce.lieuaproximité.url}}"></li>
+	 	 	{% endif %}
+	 	 	{% for c in annonces.galeries.all  %}
+		 	 	{% if c.image %}
+		 	 		 <a href="#" class="image"><img src="{{ c.image.url }}"/></a>
 
- 	 	    {% endif %}
-
+		 	 	{% endif %}
+		 	{% endfor %}
  	 	</ul>
 
 	{% endfor %}
 
  </div>
+ 
+ {% include "appannonce/paginator.html" %}
 {% endblock %}

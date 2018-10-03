@@ -13,6 +13,13 @@
 
  	 			<li><img src="{{annonce.lieuaproximité.url}}"></li>
  	 	    {% endif %}
+ 	 	  	{% for annonce in annonces.image_set.all %}
+		 	 	{% if annonce.image %}
+		 	 		  <li><img src="{{ annonce.image.url }}"/></li>
+		 	 		  
+
+		 	 	{% endif %}
+		 	{% endfor %}
 
  	 		<a href="{% url "listannonce"  %}">Retour a la page liste des nouveaux annonces </a>
 

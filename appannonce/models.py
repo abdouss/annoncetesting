@@ -14,6 +14,7 @@ NAME_REGEX = '^[a-zA-Z]*$'
 from django.urls import reverse
 
 class Galerie(models.Model):
+		
 
 		image = models.ImageField(null=True, 
 		                            blank=True,default='img/default.png',
@@ -43,7 +44,7 @@ class Annonce(models.Model):
 	lieuaproximité   =models.FileField(blank=True)
 	slug             =models.SlugField(unique=True)
 	phone            =models.PositiveIntegerField()
-	image            =models.ForeignKey(Galerie,on_delete=models.CASCADE,related_name='images',null=True)
+	image            =models.ForeignKey(Galerie,on_delete=models.CASCADE,related_name='galeries',null=True)
 
 	tiping           =(('lo','Location'),('ve','vente'),)
 

@@ -12,6 +12,9 @@ from .models import Annonce
 from .forms import Annonceform
 from django.urls import reverse_lazy
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from appannonce.filter import AnnonceFilter
+
 def contact(request):
     form = ContactForm(request.POST or None)
     if form.is_valid():
@@ -58,6 +61,7 @@ class CreateAnnonce(LoginRequiredMixin,CreateView):
 	template_name    ="appannonce/Formannonce.html"
 
 
+
 	def get_success_url(self, *args, **kwargs):
 	   return reverse('detailannonce',kwargs={'slug':self.object.slug})
 
@@ -89,27 +93,13 @@ class ListAnnonce(ListView):#lister les annonce est on choisier la ville est cat
 
 
 	def get_queryset(self):
-		return self.Annonce.objects.filter(ville__exact='villes').filter(category__exact="categorys").filter(typeannonce__exact="typeannonce")
-
-from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+		return Annonce.objects.order_by('?')
 
 def listerchoix(request):
+	annoncelist =Annonce.objects.all()
+	annoncefilter =AnnonceFilter(request.GET,queryset=annoncelist)
+	
 
-	querylist =Annonce.objects.all()
-	query     =request.GET.get('q')
-
-	if query:
-		querylist =querylist.filter(Q(ville__icontains=query)|Q(categorie__icontains=query)|Q(typeannonce__icontains=query))
-
-	paginator = Paginator(querylist, 12)
-	page = request.GET.get("page")
-	try:
-	    query_list = paginator.page(page)
-	except PageNotAnInteger:
-	    query_list = paginator.page(1)
-	except EmptyPage:
-	    query_list = paginator.page(paginator.num_pages)
-
-	context = { "query_list": query_list }
+	context = { "queryset": annoncelist,"filter":annoncefilter }
+	print(annoncelist)
 	return render(request, "appannonce/annonce_list.html", context)
